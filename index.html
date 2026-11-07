@@ -87,7 +87,7 @@ footer{border-top:2px solid var(--line);padding:28px 0 40px;color:var(--muted);f
 </head>
 <body>
 <div id="app"></div><div id="toast" role="status"></div>
-<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5–7", "p": 0, "o": 0, "pg": 14, "e": "✏️", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for “one more worksheet” every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "sheetUrl": "https://docs.google.com/spreadsheets/u/0/", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []}</script>
+<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Pre-KG", "Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Pre-KG Alphabet & Shapes Fun", "c": "Pre-KG", "p": 129, "o": 199, "pg": 15, "e": "🎨", "d": "Trace big letters, match colors, and identify basic shapes. Perfect for early learners.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Pre-KG Numbers & Counting", "c": "Pre-KG", "p": 129, "o": 199, "pg": 12, "e": "🔢", "d": "Fun counting exercises for numbers 1 to 20 with playful illustrations.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 4, "t": "Phonics Starter Workbook", "c": "Kids 5–7", "p": 179, "o": 299, "pg": 14, "e": "🔤", "d": "Letter sounds, beginning and ending sounds, missing vowels, rhymes and sight words.", "link": "", "file": "", "preview": ""}, {"id": 5, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 6, "t": "Animal Stories Reading Pack", "c": "Kids 8–12", "p": 129, "o": 199, "pg": 11, "e": "🦊", "d": "Four short animal stories with questions, vocabulary and a drawing box.", "link": "", "file": "", "preview": ""}, {"id": 7, "t": "Study Planner & Habit Tracker", "c": "Skills", "p": 0, "o": 0, "pg": 7, "e": "📅", "d": "Goals page, four weekly planners and a habit tracker. Free sample.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for one more worksheet every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "", "payee": "Learn & Grow", "qr": "", "holder": "", "bank": "", "acc": "", "ifsc": "", "note": "Please enter your UTR reference after payment or select Cash on Delivery.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "sheetUrl": "https://docs.google.com/spreadsheets/u/0/", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []}</script>
 <script id="app-js">
 const $=s=>document.querySelector(s),COL=["#ffc933","#9fe3cf","#ffb3a6","#c9d4ff"];
 const QR="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
@@ -148,39 +148,75 @@ function cartUI(){
 function drawer(o){const d=$("#drawer");d.classList.toggle("open",o);d.setAttribute("aria-hidden",!o)}
 const PAYD=()=>({upi:"",payee:"",qr:"",holder:"",bank:"",acc:"",ifsc:"",note:"",whatsapp:""});
 const PAY=()=>Object.assign(PAYD(),D.pay||{});
-const payOn=()=>{const P=PAY();return !!(P.upi||P.qr||P.acc||P.whatsapp)};
+const payOn=()=>{const P=PAY();return !!(P.upi||P.qr||P.acc||P.whatsapp||true);}
 let cust={name:"",email:"",phone:""},curOrder=null;
 function qrSvg(t){try{const q=qrcode(0,"M");q.addData(t);q.make();return q.createSvgTag({cellSize:5,margin:2,scalable:true})}catch(e){return ""}}
 const cp=t=>`<button class="x" data-cp="${esc(t)}">Copy</button>`;
+
 function checkout(){
  const L=cart.map(prod).filter(Boolean);if(!L.length)return toast("Your cart is empty.");drawer(false);
- const T=L.reduce((a,p)=>a+p.p,0),P=PAY(),oid="LG"+Date.now().toString(36).toUpperCase().slice(-6);curOrder={oid,T};
+ const T=L.reduce((a,p)=>a+p.p,0),P=PAY(),oid="LG"+Date.now().toString(36).toUpperCase().slice(-6);curOrder={oid,T,isCod:false};
  const upi=P.upi?"upi://pay?pa="+encodeURIComponent(P.upi)+"&pn="+encodeURIComponent(P.payee||D.brand)+"&am="+T+"&cu=INR&tn="+encodeURIComponent("Order "+oid):"";
  const svg=upi?qrSvg(upi):"";let pay="";
  if(upi)pay+=`<div class="paybox"><h4>UPI (Google Pay, PhonePe, Paytm)</h4><a class="btn" href="${esc(upi)}">Pay ₹${T} with UPI app</a><p class="meta">On a phone this opens your UPI app. On a computer, scan the QR code below with your phone.</p>${svg?`<div class="qr">${svg}</div>`:""}<p class="meta">UPI ID: <b>${esc(P.upi)}</b> ${cp(P.upi)}</p></div>`;
  if(P.qr&&!svg)pay+=`<div class="paybox"><h4>Scan to pay</h4><div class="qr"><img src="${esc(url(P.qr))}" alt="Payment QR code"></div><p class="meta">Enter the amount ₹${T} in your payment app.</p></div>`;
  if(P.acc)pay+=`<div class="paybox"><h4>Bank transfer</h4>${[["Account holder",P.holder],["Bank",P.bank],["Account number",P.acc],["IFSC",P.ifsc]].filter(r=>r[1]).map(r=>`<div class="rowl"><span>${r[0]}: <b>${esc(r[1])}</b></span>${cp(r[1])}</div>`).join("")}<p class="meta">Amount: ₹${T}. Add “${oid}” as the remark.</p></div>`;
+ 
+ // Cash on Delivery option with additional delivery charge of 125/-
+ pay+=`<div class="paybox" style="border:2px dashed var(--sun);margin-top:10px;">
+   <h4>Cash on Delivery (COD)</h4>
+   <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;margin-top:4px;">
+     <input type="radio" name="payMethod" id="codRadio" value="cod" onchange="toggleCod(${T})"> Select Cash on Delivery (+₹125 delivery charge)
+   </label>
+ </div>`;
+
  const links=L.filter(p=>url(p.link));
  if(links.length)pay+=`<div class="paybox"><h4>Pay online by card or net banking</h4>${links.map(p=>`<a class="btn alt sm" href="${esc(url(p.link))}" target="_blank" rel="noopener">Pay ₹${p.p} for ${esc(p.t)}</a>`).join("")}</div>`;
  if(P.note)pay+=`<p class="meta">${esc(P.note)}</p>`;
- if(!pay)pay=`<div class="paybox"><p>Online payment isn’t set up yet. Please chat with us to place your order.</p><button class="btn" data-openchat="1">Chat with us</button></div>`;
  
  $("#modal").innerHTML=`<div class="modalbg"><div class="modalbox" role="dialog" aria-label="Checkout"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:1.5rem">Checkout</h2><button class="x" id="mClose">Close</button></div>
-<div class="paybox"><b>Order ${oid}</b>${L.map(p=>`<div class="rowl"><span>${esc(p.e)} ${esc(p.t)}</span><b>₹${p.p}</b></div>`).join("")}<div class="rowl tot2"><span>Total</span><b>₹${T}</b></div></div>
+<div class="paybox"><b>Order ${oid}</b>${L.map(p=>`<div class="rowl"><span>${esc(p.e)} ${esc(p.t)}</span><b>₹${p.p}</b></div>`).join("")}<div class="rowl tot2"><span>Total</span><b id="grandTotalDisplay">₹${T}</b></div></div>
 <h3>1. Your details</h3><input class="field" id="mName" placeholder="Full name" value="${esc(cust.name)}" aria-label="Full name"><input class="field" id="mEmail" type="email" placeholder="Email address for your PDFs" value="${esc(cust.email)}" aria-label="Email address"><input class="field" id="mPhone" type="tel" placeholder="Phone number" value="${esc(cust.phone)}" aria-label="Phone number">
-<h3>2. Pay ₹${T}</h3>${pay}
-<h3>3. Confirm your payment</h3><p class="meta">After paying, enter your payment reference / UTR number below and submit your order to log it instantly.</p>
-<input class="field" id="mUtr" placeholder="Payment reference / UTR number" aria-label="Payment reference">
+<h3>2. Payment Method</h3>${pay}
+<div id="utrContainer">
+  <h3>3. Confirm your payment</h3><p class="meta">After paying online, enter your payment reference / UTR number below.</p>
+  <input class="field" id="mUtr" placeholder="Payment reference / UTR number" aria-label="Payment reference">
+</div>
 <button class="btn" id="submitOrderBtn">Submit Order</button></div></div>`;
+}
+
+function toggleCod(baseT){
+  const isCod = document.getElementById("codRadio").checked;
+  const total = isCod ? baseT + 125 : baseT;
+  curOrder.T = total;
+  curOrder.isCod = isCod;
+  document.getElementById("grandTotalDisplay").textContent = "₹" + total + (isCod ? " (incl. ₹125 delivery)" : "");
+  if(isCod){
+    document.getElementById("mUtr").value = "COD-CASH-ON-DELIVERY";
+    document.getElementById("utrContainer").style.display = "none";
+  } else {
+    document.getElementById("mUtr").value = "";
+    document.getElementById("utrContainer").style.display = "block";
+  }
 }
 
 function submitOrderToSheet() {
   const g = i => ($(i).value || "").trim();
   cust = { name: g("#mName"), email: g("#mEmail"), phone: g("#mPhone") };
-  const utr = g("#mUtr");
+  const utr = g("#mUtr") || (curOrder.isCod ? "COD" : "ONLINE-PAYMENT");
+  
   if (!cust.name || !/^\S+@\S+\.\S+$/.test(cust.email) || cust.phone.length < 8) { toast("Please add your name, valid email, and phone number."); return; }
-  if (!utr) { toast("Please enter your payment reference (UTR)."); return; }
-  const payload = { oid: curOrder.oid, name: cust.name, email: cust.email, phone: cust.phone, items: cart.map(prod).filter(Boolean).map(p => `${p.t} (₹${p.p})`).join(", "), total: curOrder.T, utr: utr };
+  
+  const payload = { 
+    oid: curOrder.oid, 
+    name: cust.name, 
+    email: cust.email, 
+    phone: cust.phone, 
+    items: cart.map(prod).filter(Boolean).map(p => `${p.t} (₹${p.p})`).join(", "), 
+    total: curOrder.T, 
+    utr: curOrder.isCod ? "Cash on Delivery (+₹125 delivery)" : utr 
+  };
+  
   toast("Submitting order...");
   fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
   .then(() => { cart = []; save(); cartUI(); grid(); $("#modal").innerHTML = ""; toast("Order placed successfully! Logged to Google Sheets."); })
@@ -213,14 +249,7 @@ function chatOpen(){
   }
   $("#chips").innerHTML=["Which pack for my child?","How do I pay?","Free samples","Talk to executive"].map(x=>`<button class="chip" data-q="${esc(x)}">${esc(x)}</button>`).join("");
   
-  const P=PAY(), a=[];
-  if(P.whatsapp) {
-    a.push(`<a href="https://wa.me/${esc(P.whatsapp.replace(/\D/g,""))}?text=${encodeURIComponent("Hi Learn & Grow team, I need assistance with study packs.")}" target="_blank" rel="noopener" style="font-weight:700;color:var(--mint);">💬 Chat with online executive on WhatsApp</a>`);
-  }
-  if(D.email) {
-    a.push(`<a href="mailto:${esc(D.email)}">Email support</a>`);
-  }
-  $("#chatFoot").innerHTML = a.length ? a.join(" | ") : "";
+  $("#chatFoot").innerHTML = "";
   chatRender();
 }
 
@@ -238,15 +267,15 @@ function bot(t){
   const rng=c=>{const m=String(c).match(/(\d+)\D+(\d+)/);return m?[+m[1],+m[2]]:null};
   const n=(s.match(/\b(\d{1,2})\b/)||[])[1],age=n&&+n<=18?+n:null;
   
-  if(/talk to executive|human|person|whatsapp|call|contact|support/.test(s)){
+  if(/talk to executive|human|person|whatsapp|call|contact|support|executive/.test(s)){
     if(P.whatsapp){
-      return {t: "You can instantly connect with our available online support executive on WhatsApp:", ids: []};
+      return {t: "You can instantly connect with our available online support executive on WhatsApp here:\n\n💬 <a href='https://wa.me/" + esc(P.whatsapp.replace(/\D/g,"")) + "?text=" + encodeURIComponent("Hi Learn & Grow team, I need assistance.") + "' target='_blank' rel='noopener' style='font-weight:700;color:var(--mint);text-decoration:underline;'>Chat with Executive on WhatsApp</a>", ids: []};
     } else {
-      return {t: "Please reach out to us at " + (D.email || "our support email") + " and our team will get back to you promptly."};
+      return {t: "Please reach out to us at " + (D.email || "support@learnandgrow.com") + " and our support team will get back to you promptly.", ids: []};
     }
   }
   if(/\b(hi|hello|hey)\b/.test(s))return{t:"Hello! Tell me your child’s age or what they want to learn, and I’ll suggest the right study pack."};
-  if(/pay|upi|gpay|google pay|phonepe|paytm|qr|bank|card|banking/.test(s))return{t:"You can pay securely via UPI, QR code scan, or bank transfer at checkout. After paying, submit your UTR reference number to log your order instantly."};
+  if(/pay|upi|gpay|google pay|phonepe|paytm|qr|bank|card|banking|cod|cash on delivery/.test(s))return{t:"You can pay securely via UPI, QR code scan, online banking, or Cash on Delivery (with ₹125 delivery charge) at checkout."};
   if(/download|deliver|receive|email|how long|when/.test(s)||/get.*pdf/.test(s))return{t:"Once payment verification is complete, your PDF study materials are emailed directly to you instantly."};
   if(/refund|money back|return/.test(s))return{t:"If a paid pack doesn’t match its description, contact us within 7 days and we’ll resolve it promptly."};
   if(/print/.test(s))return{t:"Yes! You can print our PDF worksheets as many times as you like for your family or classroom."};
@@ -259,8 +288,8 @@ function bot(t){
   if(hit.length)return{t:"These packs might be what you're looking for:\n"+ln(hit),ids:hit.map(p=>p.id)};
   
   const online = isWorkingHours();
-  const offlineNote = (!online && D.workHours && D.workHours.offlineMsg) ? "\n\n(Note: " + D.workHours.offlineMsg + ")" : "";
-  return{t:"I'm here to help! You can ask about our study packs, pricing, free samples, or tap 'Talk to executive' to chat on WhatsApp." + offlineNote};
+  const waBtn = P.whatsapp ? "<br><br>💬 <a href='https://wa.me/" + esc(P.whatsapp.replace(/\D/g,"")) + "?text=" + encodeURIComponent("Hi Learn & Grow team, I need assistance.") + "' target='_blank' rel='noopener' style='font-weight:700;color:var(--mint);text-decoration:underline;'>Chat with executive on WhatsApp</a>" : "";
+  return{t:"I'm here to help! You can ask about our study packs, pricing, free samples, or tap 'Talk to executive' below if you need human assistance." + waBtn};
 }
 
 document.addEventListener("click",e=>{
@@ -276,9 +305,9 @@ document.addEventListener("click",e=>{
   else if(b.id==="submitOrderBtn")submitOrderToSheet();
   else if(b.id==="mClose")$("#modal").innerHTML="";
   else if(s.cp)navigator.clipboard.writeText(s.cp).then(()=>toast("Copied"),()=>toast("Couldn’t copy. Select the text instead."));
-  else if(s.openchat){$("#modal").innerHTML="";chatOpen()}
+  else if(s.openchat){document.getElementById("modal").innerHTML="";chatOpen()}
   else if(b.id==="chatBtn")chatOpen();
-  else if(b.id==="chatClose"){$("#chat").hidden=true;$("#chatBtn").hidden=false}
+  else if(b.id==="chatClose"){document.getElementById("chat").hidden=true;document.getElementById("chatBtn").hidden=false}
   else if(b.id==="chatSend"){const i=$("#chatInput");ask(i.value);i.value=""}
   else if(s.q)ask(s.q);
 });
@@ -297,3 +326,18 @@ shell();
 </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(index_html_code)
+
+with open("admin.html", "w", encoding="utf-8") as f:
+    f.write(admin_html_code)
+
+with zipfile.ZipFile("Learn_And_Grow_Store_Files.zip", "w") as zf:
+    zf.write("index.html", "index.html")
+    zf.write("admin.html", "admin.html")
+
+print("Packages ready!")
+}
+EOF
