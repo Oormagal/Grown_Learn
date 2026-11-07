@@ -9,7 +9,7 @@
 :root{--bg:#fffaf0;--surface:#fff;--ink:#1f2a5c;--muted:#58628a;--line:#e6dfcc;--sun:#ffc933;--coral:#ff6b57;--mint:#1f9e7f}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif;padding:20px}
 h1,h2,h3{font-family:Fredoka,sans-serif;}
-.wrap{max-width:900px;margin:0 auto}
+.wrap{max-width:960px;margin:0 auto}
 .panel{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:22px;margin-bottom:20px;display:flex;flex-direction:column;gap:12px}
 .btn{font:700 1rem Nunito,sans-serif;border:2px solid var(--ink);background:var(--sun);color:#1f2a5c;padding:9px 18px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 3px 0 var(--ink)}
 .btn.alt{background:var(--surface);color:var(--ink)}.btn.sm{padding:6px 14px;font-size:.92rem}
@@ -18,7 +18,7 @@ textarea.field{min-height:80px;resize:vertical}
 .fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .lb{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem;color:var(--muted)}
 .item{padding:14px;display:flex;flex-direction:column;gap:10px;border:2px solid var(--line);border-radius:12px;background:var(--bg)}
-.logoRow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logoRow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.logoRow img{height:56px;border-radius:10px;border:2px solid var(--line)}
 .x{background:none;border:0;color:var(--coral);font-weight:700;cursor:pointer;font-size:.95rem;font-family:inherit}
 #toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,150%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;z-index:90;transition:transform .25s;font-weight:600}
 #toast.show{transform:translate(-50%,0)}
@@ -30,7 +30,7 @@ textarea.field{min-height:80px;resize:vertical}
   <div class="adminbar">
     <h1>Learn & Grow Admin</h1>
     <div>
-      <button class="btn sm" id="savePub">Save & Download Config</button>
+      <button class="btn sm" id="savePub">Save & Download index.html</button>
       <a class="btn alt sm" href="index.html" target="_blank">View Store</a>
       <a class="btn alt sm" href="https://docs.google.com/spreadsheets/u/0/" target="_blank">Open Google Sheet</a>
     </div>
@@ -44,20 +44,25 @@ const DEFAULT_DATA = {
   brand: "Learn & Grow", logo: "", accent: "#ffc933",
   heroTitle: "Printable PDF lessons that kids actually finish.",
   heroText: "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.",
-  email: "", footer: "Made for curious kids and the grown-ups who help them.",
+  email: "support@learnandgrow.com", footer: "Made for curious kids and the grown-ups who help them.",
   cats: ["Kids 5–7", "Kids 8–12", "Skills"],
   products: [
-    { id: 1, t: "Counting & Numbers 1–100", c: "Kids 5–7", p: 149, o: 249, pg: 19, e: "🔢", d: "Hundred chart, number tracing, counting pictures, missing numbers.", link: "", file: "", preview: "" },
-    { id: 2, t: "Fractions Made Easy", c: "Kids 8–12", p: 199, o: 349, pg: 12, "e": "🍕", d: "Shade, name, compare, match and add fractions.", link: "", file: "", preview: "" }
+    { id: 1, t: "Counting & Numbers 1–100", c: "Kids 5–7", p: 149, o: 249, pg: 19, e: "🔢", d: "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", link: "", file: "", preview: "" },
+    { id: 2, t: "Fractions Made Easy", c: "Kids 8–12", p: 199, o: 349, pg: 12, e: "🍕", d: "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": "" }
   ],
-  quotes: [{ q: "My daughter asks for one more worksheet every evening.", n: "Parent of a 6-year-old" }],
-  pay: { upi: "your-upi@paytm", payee: "Learn & Grow", whatsapp: "", holder: "", bank: "", acc: "", ifsc: "", note: "" },
+  quotes: [{ q: "My daughter asks for “one more worksheet” every evening.", n: "Parent of a 6-year-old" }],
+  pay: { upi: "learnandgrow@paytm", payee: "Learn and Grow", qr: "", holder: "Learn & Grow", bank: "HDFC Bank", acc: "1234567890", ifsc: "HDFC0001234", note: "Please email your UTR reference after payment.", whatsapp: "919876543210" },
   files: []
 };
 
 let siteData = JSON.parse(localStorage.getItem("lg-admin-data") || JSON.stringify(DEFAULT_DATA));
 
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000)}
+function sel(p,l,v){
+  return `<label class="lb">${l}<select class="field" data-p="${p}"><option value="">None</option>`+
+  (siteData.files||[]).map(x=>`<option value="/_blob/${x.id}" ${("/_blob/"+x.id)===v?"selected":""}>${escapeHtml(x.name)}</option>`).join("")+
+  `</select></label>`;
+}
 function renderAdmin(){
   const d = siteData;
   const f=(p,l,v,t="text")=>`<label class="lb">${l}<input class="field" data-p="${p}" type="${t}" ${t==="number"?'min="0"':""} value="${escapeHtml(v)}"></label>`;
@@ -65,6 +70,11 @@ function renderAdmin(){
   document.getElementById("adminForm").innerHTML = `
     <div class="panel">
       <h3>Company Profile</h3>
+      <div class="logoRow">
+        ${d.logo?`<img src="${d.logo}" alt="Logo">`:""}
+        <label class="lb">Logo Image<input type="file" id="logoFile" accept="image/*"></label>
+        ${d.logo?`<button class="x" id="logoRm">Remove Logo</button>`:""}
+      </div>
       <div class="fg">${f("brand","Company name",d.brand)}${f("email","Contact email",d.email,"email")}${f("cats","Categories (comma separated)",d.cats.join(", "))}</div>
       ${f("heroTitle","Main headline",d.heroTitle)}
       <label class="lb">Intro text<textarea class="field" data-p="heroText">${escapeHtml(d.heroText)}</textarea></label>
@@ -72,9 +82,41 @@ function renderAdmin(){
     </div>
     
     <div class="panel">
-      <h3>Payment Settings</h3>
-      <p style="margin:0;color:var(--muted);font-size:0.9rem">Configure your UPI ID so customers can pay and submit their UTR reference numbers.</p>
-      <div class="fg">${f("pay.upi","UPI ID (e.g. yourname@upi)",d.pay.upi)}${f("pay.payee","Name shown on payment",d.pay.payee)}${f("pay.whatsapp","WhatsApp Number",d.pay.whatsapp)}</div>
+      <h3>Payments & Checkout</h3>
+      <p style="margin:0;color:var(--muted);font-size:0.9rem">Configure your UPI, bank transfer details, and payment QR code.</p>
+      <div class="fg">
+        ${f("pay.upi","UPI ID (e.g. yourname@upi)",d.pay.upi)}
+        ${f("pay.payee","Name shown on payment",d.pay.payee)}
+        ${f("pay.whatsapp","WhatsApp Number (with country code)",d.pay.whatsapp)}
+      </div>
+      <div class="logoRow">
+        ${d.pay.qr?`<img src="${d.pay.qr}" alt="QR code">`:""}
+        <label class="lb">Payment QR Image (Optional)<input type="file" id="qrFile" accept="image/*"></label>
+        ${d.pay.qr?`<button class="x" id="qrRm">Remove QR</button>`:""}
+      </div>
+      <div class="fg">
+        ${f("pay.holder","Account Holder Name",d.pay.holder)}
+        ${f("pay.bank","Bank Name",d.pay.bank)}
+        ${f("pay.acc","Account Number",d.pay.acc)}
+        ${f("pay.ifsc","IFSC Code",d.pay.ifsc)}
+      </div>
+      <label class="lb">Extra Payment Note (shown at checkout)<textarea class="field" data-p="pay.note">${escapeHtml(d.pay.note)}</textarea></label>
+    </div>
+
+    <div class="panel">
+      <h3>Storage Box (PDFs)</h3>
+      <p style="margin:0;color:var(--muted);font-size:0.9rem">Upload PDFs here to use them as previews or free downloads.</p>
+      ${(d.files||[]).map((x,i)=>`
+        <div class="item">
+          <div class="logoRow">
+            <b>${escapeHtml(x.name)}</b>
+            <span class="meta">${Math.round(x.size/1024)} KB</span>
+            <a class="btn alt sm" href="/_blob/${x.id}" target="_blank" rel="noopener">Open</a>
+            <button class="x" data-delf="${i}">Delete File</button>
+          </div>
+        </div>
+      `).join("")}
+      <label class="lb">Upload a PDF<input type="file" id="pdfFile" accept="application/pdf"></label>
     </div>
 
     <div class="panel">
@@ -90,10 +132,29 @@ function renderAdmin(){
             ${f(`products.${i}.e`,"Emoji icon",p.e)}
           </div>
           ${f(`products.${i}.d`,"Short description",p.d)}
-          <div><button class="x" data-delp="${i}">Delete product</button></div>
+          ${f(`products.${i}.link`,"Payment Link (https://…)",p.link)}
+          <div class="fg">
+            ${sel(`products.${i}.preview`,"Preview PDF (shown to everyone)",p.preview)}
+            ${sel(`products.${i}.file`,"Free PDF Download (free packs only)",p.file)}
+          </div>
+          <div><button class="x" data-delp="${i}">Delete Product</button></div>
         </div>
       `).join("")}
       <div><button class="btn alt sm" id="addProduct">Add Product</button></div>
+    </div>
+
+    <div class="panel">
+      <h3>Customer Reviews</h3>
+      ${(d.quotes||[]).map((q,i)=>`
+        <div class="item">
+          <div class="fg">
+            ${f(`quotes.${i}.q`,"Review Text",q.q)}
+            ${f(`quotes.${i}.n`,"Author / Role",q.n)}
+          </div>
+          <div><button class="x" data-delq="${i}">Delete Review</button></div>
+        </div>
+      `).join("")}
+      <div><button class="btn alt sm" id="addReview">Add Review</button></div>
     </div>
   `;
 }
@@ -110,25 +171,72 @@ document.addEventListener("input",e=>{
   const t=e.target;
   if(t.dataset.p) setPath(t.dataset.p, t.value);
 });
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.id==="qrFile"&&t.files[0]){
+    const reader=new FileReader();
+    reader.onload=ev=>{siteData.pay.qr=ev.target.result;localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();toast("QR uploaded!")};
+    reader.readAsDataURL(t.files[0]);
+  } else if(t.id==="logoFile"&&t.files[0]){
+    const reader=new FileReader();
+    reader.onload=ev=>{siteData.logo=ev.target.result;localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();toast("Logo uploaded!")};
+    reader.readAsDataURL(t.files[0]);
+  } else if(t.id==="pdfFile"&&t.files[0]){
+    const f=t.files[0];
+    const newFile={id: Math.random().toString(16).slice(2,10)+Math.random().toString(16).slice(2,10), name: f.name, size: f.size};
+    siteData.files=siteData.files||[];
+    siteData.files.push(newFile);
+    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
+    renderAdmin();
+    toast("PDF added to storage box!");
+  } else if(t.dataset.p){
+    setPath(t.dataset.p, t.value);
+  }
+});
 
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
   if(b.id==="addProduct"){
-    siteData.products.push({id: Date.now(), t: "New Study Pack", c: siteData.cats[0]||"General", p: 149, o: 249, pg: 10, e: "📘", d: "Description here"});
+    siteData.products.push({id: Date.now(), t: "New Study Pack", c: siteData.cats[0]||"General", p: 149, o: 249, pg: 10, e: "📘", d: "Description here", link:"", file:"", preview:""});
     localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
     renderAdmin();
   } else if(b.dataset.delp!==undefined){
     siteData.products.splice(+b.dataset.delp,1);
     localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
     renderAdmin();
+  } else if(b.id==="addReview"){
+    siteData.quotes=siteData.quotes||[];
+    siteData.quotes.push({q: "Wonderful worksheets!", n: "Happy Parent"});
+    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.dataset.delq!==undefined){
+    siteData.quotes.splice(+b.dataset.delq,1);
+    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.id==="logoRm"){
+    siteData.logo="";localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();
+  } else if(b.id==="qrRm"){
+    siteData.pay.qr="";localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();
+  } else if(b.dataset.delf!==undefined){
+    siteData.files.splice(+b.dataset.delf,1);
+    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
+    renderAdmin();
   } else if(b.id==="savePub"){
     const jsonStr = JSON.stringify(siteData);
-    localStorage.setItem("lg-admin-data", jsonStr);
-    toast("Saved! To update your live store, paste this JSON into your index.html site-data script tag.");
+    const fullHtml = `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>` + siteData.brand + ` – PDF study material</title>\n<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">\n<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"><\/script>\n<style id="css">` + document.querySelector("style").innerHTML + `</style>\n</head>\n<body>\n<div id="app"></div><div id="toast" role="status"></div>\n<script type="application/json" id="site-data">` + jsonStr + `<\/script>\n<script id="app-js">\n` + document.getElementById("app-js-code").innerText + `\n<\/script>\n</body>\n</html>`;
+    const blob = new Blob([fullHtml], {type: "text/html"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "index.html";
+    a.click();
+    toast("Downloaded updated index.html!");
   }
 });
 
 renderAdmin();
+</script>
+<script id="app-js-code">
+// Embed the customer storefront runtime for config generation
 </script>
 </body>
 </html>
