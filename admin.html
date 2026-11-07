@@ -49,7 +49,7 @@ textarea.field{min-height:90px;resize:vertical}
   <div class="adminbar">
     <h1>Learn & Grow Admin</h1>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn sm" id="savePub">Save & Download index.html</button>
+      <button class="btn sm" id="savePub">Save Changes</button>
       <a class="btn alt sm" href="index.html" target="_blank">View Store</a>
       <a class="btn alt sm" id="openSheetLink" href="https://docs.google.com/spreadsheets/u/0/" target="_blank">Open Google Sheet</a>
     </div>
@@ -59,25 +59,72 @@ textarea.field{min-height:90px;resize:vertical}
 <div id="toast" role="status"></div>
 
 <script>
-const DEFAULT_DATA = {"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5\u20137", "Kids 8\u201312", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1\u2013100", "c": "Kids 5\u20137", "p": 149, "o": 249, "pg": 19, "e": "\ud83d\udd22", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8\u201312", "p": 199, "o": 349, "pg": 12, "e": "\ud83c\udf55", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5\u20137", "p": 0, "o": 0, "pg": 14, "e": "\u270f\ufe0f", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for \u201cone more worksheet\u201d every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "sheetUrl": "https://docs.google.com/spreadsheets/u/0/", "adminPass": "admin123", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []};
+const DEFAULT_DATA = {
+  "brand": "Learn & Grow",
+  "logo": "",
+  "accent": "#ffc933",
+  "heroTitle": "Printable PDF lessons that kids actually finish.",
+  "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.",
+  "email": "support@learnandgrow.com",
+  "footer": "Made for curious kids and the grown-ups who help them.",
+  "cats": ["Kids 5–7", "Kids 8–12", "Skills"],
+  "products": [
+    { "id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": "" },
+    { "id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": "" }
+  ],
+  "quotes": [
+    { "q": "My daughter asks for one more worksheet every evening.", "n": "Parent of a 6-year-old" }
+  ],
+  "pay": {
+    "upi": "",
+    "payee": "Learn & Grow",
+    "qr": "",
+    "holder": "",
+    "bank": "",
+    "acc": "",
+    "ifsc": "",
+    "note": "Please enter your UTR reference after payment or select Cash on Delivery.",
+    "whatsapp": ""
+  },
+  "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec",
+  "sheetUrl": "https://docs.google.com/spreadsheets/u/0/",
+  "adminPass": "admin123",
+  "workHours": {
+    "start": "09:00",
+    "end": "18:00",
+    "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"
+  },
+  "files": []
+};
 
 let siteData = JSON.parse(localStorage.getItem("lg-admin-data") || JSON.stringify(DEFAULT_DATA));
 if(!siteData.adminPass) siteData.adminPass = "admin123";
 if(!siteData.workHours) siteData.workHours = DEFAULT_DATA.workHours;
 if(!siteData.sheetUrl) siteData.sheetUrl = "https://docs.google.com/spreadsheets/u/0/";
 
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000)}
+function toast(m){
+  const t = document.getElementById("toast");
+  t.textContent = m;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3000);
+}
 
 document.getElementById("togglePassLogin").addEventListener("click", () => {
   const inp = document.getElementById("adminPassInput");
   const btn = document.getElementById("togglePassLogin");
-  if(inp.type === "password"){ inp.type = "text"; btn.textContent = "Hide"; }
-  else { inp.type = "password"; btn.textContent = "Show"; }
+  if(inp.type === "password"){
+    inp.type = "text";
+    btn.textContent = "Hide";
+  } else {
+    inp.type = "password";
+    btn.textContent = "Show";
+  }
 });
 
 document.getElementById("loginBtn").addEventListener("click", () => {
   const pwd = document.getElementById("adminPassInput").value.trim();
-  if(pwd === (siteData.adminPass || "admin123")){
+  const targetPass = siteData.adminPass || "admin123";
+  if(pwd === targetPass){
     document.getElementById("loginOverlay").style.display = "none";
     document.getElementById("adminMainContent").style.display = "block";
     renderAdmin();
@@ -92,7 +139,7 @@ document.getElementById("adminPassInput").addEventListener("keydown", (e) => {
 
 function renderAdmin(){
   const d = siteData;
-  const f=(p,l,v,t="text")=>`<label class="lb">${l}<input class="field" data-p="${p}" type="${t}" ${t==="number"?'min="0"':""} value="${escapeHtml(v)}"></label>`;
+  const f = (p,l,v,t="text") => `<label class="lb">${l}<input class="field" data-p="${p}" type="${t}" ${t==="number"?'min="0"':""} value="${escapeHtml(v)}"></label>`;
   
   document.getElementById("openSheetLink").href = d.sheetUrl || "https://docs.google.com/spreadsheets/u/0/";
 
@@ -127,7 +174,12 @@ function renderAdmin(){
       <h3>Company Profile</h3>
       <div class="logoRow">
         ${d.logo?`<img src="${d.logo}" alt="Logo">`:""}
-        <label class="lb">Logo URL or Image Link<input class="field" data-p="logo" type="text" value="${escapeHtml(d.logo)}" placeholder="https://..."></label>
+        <label class="lb">Logo Image (Upload file or paste URL)
+          <div style="display:flex;gap:8px;margin-top:4px;">
+            <input class="field" data-p="logo" type="text" value="${escapeHtml(d.logo)}" placeholder="https://... or select file">
+            <input type="file" id="logoUploadFile" accept="image/*" style="align-self:center;">
+          </div>
+        </label>
         ${d.logo?`<button class="x" id="logoRm">Remove Logo</button>`:""}
       </div>
       <div class="fg">${f("brand","Company name",d.brand)}${f("email","Contact email",d.email,"email")}${f("cats","Categories (comma separated)",d.cats.join(", "))}</div>
@@ -142,11 +194,16 @@ function renderAdmin(){
       <div class="fg">
         ${f("pay.upi","UPI ID (e.g. yourname@upi)",d.pay.upi)}
         ${f("pay.payee","Name shown on payment",d.pay.payee)}
-        ${f("pay.whatsapp","WhatsApp Number (with country code, e.g. 919876543210 - leave blank if not used)",d.pay.whatsapp)}
+        ${f("pay.whatsapp","WhatsApp Number",d.pay.whatsapp)}
       </div>
       <div class="logoRow">
         ${d.pay.qr?`<img src="${d.pay.qr}" alt="QR code">`:""}
-        <label class="lb">Payment QR Image URL (Optional)<input class="field" data-p="pay.qr" type="text" value="${escapeHtml(d.pay.qr)}" placeholder="https://..."></label>
+        <label class="lb">Payment QR Image (Upload file or paste URL)
+          <div style="display:flex;gap:8px;margin-top:4px;">
+            <input class="field" data-p="pay.qr" type="text" value="${escapeHtml(d.pay.qr)}" placeholder="https://... or select file">
+            <input type="file" id="qrUploadFile" accept="image/*" style="align-self:center;">
+          </div>
+        </label>
         ${d.pay.qr?`<button class="x" id="qrRm">Remove QR</button>`:""}
       </div>
       <div class="fg">
@@ -201,56 +258,111 @@ function renderAdmin(){
   const passField = document.getElementById("adminPassField");
   if(toggleBtn && passField){
     toggleBtn.onclick = () => {
-      if(passField.type === "password"){ passField.type = "text"; toggleBtn.textContent = "Hide"; }
-      else { passField.type = "password"; toggleBtn.textContent = "Show"; }
+      if(passField.type === "password"){
+        passField.type = "text";
+        toggleBtn.textContent = "Hide";
+      } else {
+        passField.type = "password";
+        toggleBtn.textContent = "Show";
+      }
+    };
+  }
+
+  const logoFileInp = document.getElementById("logoUploadFile");
+  if(logoFileInp){
+    logoFileInp.onchange = (e) => {
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          siteData.logo = ev.target.result;
+          localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+          renderAdmin();
+          toast("Logo uploaded successfully!");
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+  }
+
+  const qrFileInp = document.getElementById("qrUploadFile");
+  if(qrFileInp){
+    qrFileInp.onchange = (e) => {
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          siteData.pay.qr = ev.target.result;
+          localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+          renderAdmin();
+          toast("QR code uploaded successfully!");
+        };
+        reader.readAsDataURL(file);
+      }
     };
   }
 }
 
-function escapeHtml(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function setPath(path,val){
-  const k=path.split(".");let o=siteData;
-  for(let i=0;i<k.length-1;i++) o=o[k[i]];
-  o[k[k.length-1]]=path==="cats"?val.split(",").map(x=>x.trim()).filter(Boolean):val;
-  localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
-  if(path === "sheetUrl"){ document.getElementById("openSheetLink").href = val || "https://docs.google.com/spreadsheets/u/0/"; }
+function escapeHtml(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
 }
 
-document.addEventListener("input",e=>{
-  const t=e.target;
+function setPath(path, val){
+  const k = path.split(".");
+  let o = siteData;
+  for(let i=0; i<k.length-1; i++) o = o[k[i]];
+  o[k[k.length-1]] = path === "cats" ? val.split(",").map(x => x.trim()).filter(Boolean) : val;
+  localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+  if(path === "sheetUrl"){
+    document.getElementById("openSheetLink").href = val || "https://docs.google.com/spreadsheets/u/0/";
+  }
+}
+
+document.addEventListener("input", e => {
+  const t = e.target;
   if(t.dataset.p) setPath(t.dataset.p, t.value);
 });
-document.addEventListener("change",e=>{
-  const t=e.target;
-  if(t.dataset.p){ setPath(t.dataset.p, t.value); }
+
+document.addEventListener("change", e => {
+  const t = e.target;
+  if(t.dataset.p){
+    setPath(t.dataset.p, t.value);
+  }
 });
 
-document.addEventListener("click",e=>{
-  const b=e.target.closest("button");if(!b)return;
-  if(b.id==="addProduct"){
-    siteData.products.push({id: Date.now(), t: "New Study Pack", c: siteData.cats[0]||"General", p: 149, o: 249, pg: 10, e: "📘", d: "Description here", link:"", file:"", preview:""});
-    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
-    renderAdmin();
-  } else if(b.dataset.delp!==undefined){
-    siteData.products.splice(+b.dataset.delp,1);
-    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
-    renderAdmin();
-  } else if(b.id==="addReview"){
-    siteData.quotes=siteData.quotes||[];
-    siteData.quotes.push({q: "Wonderful worksheets!", n: "Happy Parent"});
-    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
-    renderAdmin();
-  } else if(b.dataset.delq!==undefined){
-    siteData.quotes.splice(+b.dataset.delq,1);
-    localStorage.setItem("lg-admin-data",JSON.stringify(siteData));
-    renderAdmin();
-  } else if(b.id==="logoRm"){
-    siteData.logo="";localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();
-  } else if(b.id==="qrRm"){
-    siteData.pay.qr="";localStorage.setItem("lg-admin-data",JSON.stringify(siteData));renderAdmin();
-  } else if(b.id==="savePub"){
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b) return;
+  if(b.id === "addProduct"){
+    siteData.products.push({ id: Date.now(), t: "New Study Pack", c: siteData.cats[0] || "General", p: 149, o: 249, pg: 10, e: "📘", d: "Description here", link: "", file: "", preview: "" });
     localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
-    toast("Changes saved successfully to browser storage! Use GitHub to upload index.html.");
+    renderAdmin();
+  } else if(b.dataset.delp !== undefined){
+    siteData.products.splice(+b.dataset.delp, 1);
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.id === "addReview"){
+    siteData.quotes = siteData.quotes || [];
+    siteData.quotes.push({ q: "Wonderful worksheets!", n: "Happy Parent" });
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.dataset.delq !== undefined){
+    siteData.quotes.splice(+b.dataset.delq, 1);
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.id === "logoRm"){
+    siteData.logo = "";
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.id === "qrRm"){
+    siteData.pay.qr = "";
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    renderAdmin();
+  } else if(b.id === "savePub"){
+    localStorage.setItem("lg-admin-data", JSON.stringify(siteData));
+    toast("Changes saved successfully!");
   }
 });
 </script>
