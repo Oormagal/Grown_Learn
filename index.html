@@ -87,15 +87,14 @@ footer{border-top:2px solid var(--line);padding:28px 0 40px;color:var(--muted);f
 </head>
 <body>
 <div id="app"></div><div id="toast" role="status"></div>
-<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5–7", "p": 0, "o": 0, "pg": 14, "e": "✏️", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for “one more worksheet” every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []}</script>
+<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5–7", "p": 0, "o": 0, "pg": 14, "e": "✏️", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for “one more worksheet” every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "sheetUrl": "https://docs.google.com/spreadsheets/u/0/", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []}</script>
 <script id="app-js">
 const $=s=>document.querySelector(s),COL=["#ffc933","#9fe3cf","#ffb3a6","#c9d4ff"];
 const QR="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const url=u=>/^(https?:\/\/|\/_blob\/[0-9a-f]{32}$)/i.test(u||"")?u:"";
+const url=u=>/^(https?:\/\/)/i.test(u||"")?u:"";
 let D=JSON.parse($("#site-data").textContent),cat="All",q="",cart=[];
 try{cart=JSON.parse(localStorage.getItem("lg-cart")||"[]")}catch(e){}
-// Check localStorage for admin overrides if saved
 try{
   const localAdmin=localStorage.getItem("lg-admin-data");
   if(localAdmin){ D=JSON.parse(localAdmin); }
@@ -108,7 +107,8 @@ const save=()=>{try{localStorage.setItem("lg-cart",JSON.stringify(cart))}catch(e
 const prod=id=>D.products.find(p=>p.id===id);
 function shell(){
  const ps=D.products.slice(0,3);
- $("#app").innerHTML=`<header><div class="wrap bar"><a class="logo" href="#top">${esc(D.brand)}</a>
+ const logoImg = D.logo ? `<img src="${esc(D.logo)}" alt="" style="height:36px;border-radius:8px">` : "";
+ $("#app").innerHTML=`<header><div class="wrap bar"><a class="logo" href="#top">${logoImg}${esc(D.brand)}</a>
 <nav><a href="#shelf">Shop</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></nav>
 <button class="btn alt sm cartbtn" id="openCart">Cart<b id="count">0</b></button></div></header>
 <main id="top"><div class="wrap hero"><div><h1>${esc(D.heroTitle)}</h1><p>${esc(D.heroText)}</p>
@@ -158,7 +158,7 @@ function checkout(){
  const upi=P.upi?"upi://pay?pa="+encodeURIComponent(P.upi)+"&pn="+encodeURIComponent(P.payee||D.brand)+"&am="+T+"&cu=INR&tn="+encodeURIComponent("Order "+oid):"";
  const svg=upi?qrSvg(upi):"";let pay="";
  if(upi)pay+=`<div class="paybox"><h4>UPI (Google Pay, PhonePe, Paytm)</h4><a class="btn" href="${esc(upi)}">Pay ₹${T} with UPI app</a><p class="meta">On a phone this opens your UPI app. On a computer, scan the QR code below with your phone.</p>${svg?`<div class="qr">${svg}</div>`:""}<p class="meta">UPI ID: <b>${esc(P.upi)}</b> ${cp(P.upi)}</p></div>`;
- if(P.qr&&!svg)pay+=`<div class="paybox"><h4>Scan to pay</h4><div class="qr"><img src="${P.qr}" alt="Payment QR code"></div><p class="meta">Enter the amount ₹${T} in your payment app.</p></div>`;
+ if(P.qr&&!svg)pay+=`<div class="paybox"><h4>Scan to pay</h4><div class="qr"><img src="${esc(url(P.qr))}" alt="Payment QR code"></div><p class="meta">Enter the amount ₹${T} in your payment app.</p></div>`;
  if(P.acc)pay+=`<div class="paybox"><h4>Bank transfer</h4>${[["Account holder",P.holder],["Bank",P.bank],["Account number",P.acc],["IFSC",P.ifsc]].filter(r=>r[1]).map(r=>`<div class="rowl"><span>${r[0]}: <b>${esc(r[1])}</b></span>${cp(r[1])}</div>`).join("")}<p class="meta">Amount: ₹${T}. Add “${oid}” as the remark.</p></div>`;
  const links=L.filter(p=>url(p.link));
  if(links.length)pay+=`<div class="paybox"><h4>Pay online by card or net banking</h4>${links.map(p=>`<a class="btn alt sm" href="${esc(url(p.link))}" target="_blank" rel="noopener">Pay ₹${p.p} for ${esc(p.t)}</a>`).join("")}</div>`;
@@ -187,7 +187,6 @@ function submitOrderToSheet() {
   .catch(() => { toast("Network error. Please try again."); });
 }
 
-// Check if currently within working hours
 function isWorkingHours(){
   const wh = D.workHours || { start: "09:00", end: "18:00" };
   const now = new Date();
@@ -198,8 +197,7 @@ function isWorkingHours(){
 const chat={log:[]};
 function chatRender(){
   const el=$("#chatLog");
-  el.innerHTML=chat.log.map(m=>`<div class="msg ${m.w}">${esc(m.t).replace(/
-/g,"<br>")}${(m.ids||[]).map(id=>{const p=prod(id);return p?`<div><button class="chip" ${p.p?`data-add="${id}">Add ${esc(p.t)} (₹${p.p})`:`data-free="${id}">Download ${esc(p.t)} free`}</button></div>`:""}).join("")}</div>`).join("");
+  el.innerHTML=chat.log.map(m=>`<div class="msg ${m.w}">${esc(m.t).replace(/\n/g,"<br>")}${(m.ids||[]).map(id=>{const p=prod(id);return p?`<div><button class="chip" ${p.p?`data-add="${id}">Add ${esc(p.t)} (₹${p.p})`:`data-free="${id}">Download ${esc(p.t)} free`}</button></div>`:""}).join("")}</div>`).join("");
   el.scrollTop=el.scrollHeight;
 }
 
@@ -236,10 +234,9 @@ function ask(t){
 
 function bot(t){
   const s=t.toLowerCase(), P=PAY(), paid=D.products.filter(p=>p.p), free=D.products.filter(p=>!p.p);
-  const ln=a=>a.map(p=>p.e+" "+p.t+" ("+(p.p?"₹"+p.p:"free")+")").join("
-");
+  const ln=a=>a.map(p=>p.e+" "+p.t+" ("+(p.p?"₹"+p.p:"free")+")").join("\n");
   const rng=c=>{const m=String(c).match(/(\d+)\D+(\d+)/);return m?[+m[1],+m[2]]:null};
-  const n=(s.match(/(\d{1,2})/)||[])[1],age=n&&+n<=18?+n:null;
+  const n=(s.match(/\b(\d{1,2})\b/)||[])[1],age=n&&+n<=18?+n:null;
   
   if(/talk to executive|human|person|whatsapp|call|contact|support/.test(s)){
     if(P.whatsapp){
@@ -248,27 +245,21 @@ function bot(t){
       return {t: "Please reach out to us at " + (D.email || "our support email") + " and our team will get back to you promptly."};
     }
   }
-  if(/(hi|hello|hey)/.test(s))return{t:"Hello! Tell me your child’s age or what they want to learn, and I’ll suggest the right study pack."};
+  if(/\b(hi|hello|hey)\b/.test(s))return{t:"Hello! Tell me your child’s age or what they want to learn, and I’ll suggest the right study pack."};
   if(/pay|upi|gpay|google pay|phonepe|paytm|qr|bank|card|banking/.test(s))return{t:"You can pay securely via UPI, QR code scan, or bank transfer at checkout. After paying, submit your UTR reference number to log your order instantly."};
   if(/download|deliver|receive|email|how long|when/.test(s)||/get.*pdf/.test(s))return{t:"Once payment verification is complete, your PDF study materials are emailed directly to you instantly."};
   if(/refund|money back|return/.test(s))return{t:"If a paid pack doesn’t match its description, contact us within 7 days and we’ll resolve it promptly."};
   if(/print/.test(s))return{t:"Yes! You can print our PDF worksheets as many times as you like for your family or classroom."};
-  if(/free|sample/.test(s))return{t:"Here are our free sample packs:
-"+ln(free),ids:free.map(p=>p.id)};
-  if(/price|cost|how much|cheap/.test(s))return{t:"Here are our paid study packs:
-"+ln(paid),ids:paid.map(p=>p.id)};
-  if(age){const L=D.products.filter(p=>{const r=rng(p.c);return r&&age>=r[0]&&age<=r[1]});if(L.length)return{t:"For a "+age+"-year-old child, I recommend:
-"+ln(L),ids:L.map(p=>p.id)}}
+  if(/free|sample/.test(s))return{t:"Here are our free sample packs:\n"+ln(free),ids:free.map(p=>p.id)};
+  if(/price|cost|how much|cheap/.test(s))return{t:"Here are our paid study packs:\n"+ln(paid),ids:paid.map(p=>p.id)};
+  if(age){const L=D.products.filter(p=>{const r=rng(p.c);return r&&age>=r[0]&&age<=r[1]});if(L.length)return{t:"For a "+age+"-year-old child, I recommend:\n"+ln(L),ids:L.map(p=>p.id)}}
   if(/which|recommend|suggest|child|kid|age/.test(s))return{t:"How old is your child, or which subject do they need help with? For example, type '7' or 'fractions'."};
   
   const w=s.split(/\W+/).filter(x=>x.length>3),hit=D.products.filter(p=>w.some(x=>(p.t+" "+p.d+" "+p.c).toLowerCase().includes(x))).slice(0,4);
-  if(hit.length)return{t:"These packs might be what you're looking for:
-"+ln(hit),ids:hit.map(p=>p.id)};
+  if(hit.length)return{t:"These packs might be what you're looking for:\n"+ln(hit),ids:hit.map(p=>p.id)};
   
   const online = isWorkingHours();
-  const offlineNote = (!online && D.workHours && D.workHours.offlineMsg) ? "
-
-(Note: " + D.workHours.offlineMsg + ")" : "";
+  const offlineNote = (!online && D.workHours && D.workHours.offlineMsg) ? "\n\n(Note: " + D.workHours.offlineMsg + ")" : "";
   return{t:"I'm here to help! You can ask about our study packs, pricing, free samples, or tap 'Talk to executive' to chat on WhatsApp." + offlineNote};
 }
 
@@ -296,9 +287,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.id==="chatI
 document.addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);
  if(e.target.id==="contactForm"){
    if(!D.email){toast("Contact email not set.");return;}
-   location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Message from "+f.get("name"))+"&body="+encodeURIComponent(f.get("msg")+"
-
-Reply to: "+f.get("email"));
+   location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Message from "+f.get("name"))+"&body="+encodeURIComponent(f.get("msg")+"\n\nReply to: "+f.get("email"));
  } else if(e.target.id==="signupForm"){
    if(!D.email){toast("Contact email not set.");return;}
    location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Newsletter Signup")+"&body="+encodeURIComponent("Please add me: "+f.get("email"));
