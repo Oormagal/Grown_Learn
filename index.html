@@ -12,7 +12,7 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Nunito,system-ui,sans-serif}
 h1,h2,h3,.logo{font-family:Fredoka,"Trebuchet MS",sans-serif;line-height:1.15;margin:0}
 a{color:inherit}:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
@@ -23,7 +23,7 @@ nav a{text-decoration:none;font-weight:700;margin-right:14px;color:var(--muted)}
 @media(max-width:700px){nav{display:none}}
 .btn{font:700 1rem Nunito,sans-serif;border:2px solid var(--ink);background:var(--sun);color:#1f2a5c;padding:9px 18px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 3px 0 var(--ink)}
 .btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
-.btn.alt{background:var(--surface);color:var(--ink)}.btn.sm{padding:6px 14px;font-size:.92rem}
+.btn.alt{background:var(--surface);color:var(--ink)}.btn.sm{padding:6px 14px;font-size:.9rem}
 .cartbtn b{background:var(--coral);color:#fff;border-radius:999px;padding:0 8px;margin-left:6px;font-size:.85rem}
 .hero{padding:56px 0 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
 @media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:32px}}
@@ -71,30 +71,38 @@ footer{border-top:2px solid var(--line);padding:28px 0 40px;color:var(--muted);f
 .paybox h4{margin:0;font:700 1.05rem Fredoka,sans-serif}.paybox p{margin:0}
 .rowl{display:flex;justify-content:space-between;gap:10px}.tot2{border-top:2px solid var(--line);padding-top:6px;font-size:1.1rem}
 .qr{align-self:center;background:#fff;padding:8px;border-radius:12px;border:2px solid var(--line)}.qr svg,.qr img{width:220px;height:220px;display:block}
-.chatbtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;font:700 1rem Nunito,sans-serif;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:12px 18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.chat{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:46;width:min(360px,calc(100% - 32px));height:min(520px,calc(100% - 100px));background:var(--surface);border:3px solid var(--ink);border-radius:18px;display:flex;flex-direction:column;overflow:hidden}
-.chathead{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--sun);color:#1f2a5c}.chathead .x{color:#1f2a5c}
-.chatlog{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:86%;padding:9px 12px;border-radius:14px;font-size:.95rem;line-height:1.4}
-.msg.bot{background:var(--bg);border:2px solid var(--line);align-self:flex-start}.msg.me{background:var(--ink);color:var(--bg);align-self:flex-end}
-.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
-.chip{font:700 .85rem Nunito,sans-serif;background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;margin-top:6px}
-.chatin{display:flex;gap:8px;padding:10px;border-top:2px solid var(--line)}
-.chatfoot{padding:0 12px 10px;font-size:.85rem;color:var(--muted)}.chatfoot:empty{display:none}
+.chatbtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;font:700 1rem Nunito,sans-serif;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:12px 18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;}
+.chat{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:46;width:min(360px,calc(100% - 32px));height:min(540px,calc(100% - 100px));background:var(--surface);border:3px solid var(--ink);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+.chathead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--sun);color:#1f2a5c;font-weight:700}.chathead .x{color:#1f2a5c}
+.chatlog{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:0.95rem;line-height:1.45}
+.msg.bot{background:var(--bg);border:2px solid var(--line);align-self:flex-start}
+.msg.me{background:var(--ink);color:var(--bg);align-self:flex-end}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
+.chip{font:700 0.85rem Nunito,sans-serif;background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;margin-top:4px}
+.chatin{display:flex;gap:8px;padding:12px;border-top:2px solid var(--line);background:var(--surface)}
+.chatfoot{padding:0 14px 12px;font-size:0.85rem;color:var(--muted)}.chatfoot:empty{display:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div id="app"></div><div id="toast" role="status"></div>
-<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5–7", "p": 0, "o": 0, "pg": 14, "e": "✏️", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for “one more worksheet” every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "files": []}</script>
+<script type="application/json" id="site-data">{"brand": "Learn & Grow", "logo": "", "accent": "#ffc933", "heroTitle": "Printable PDF lessons that kids actually finish.", "heroText": "Worksheets, story packs, exam practice and skill guides. Buy once, download instantly, print as many times as you like.", "email": "support@learnandgrow.com", "footer": "Made for curious kids and the grown-ups who help them.", "cats": ["Kids 5–7", "Kids 8–12", "Skills"], "products": [{"id": 1, "t": "Counting & Numbers 1–100", "c": "Kids 5–7", "p": 149, "o": 249, "pg": 19, "e": "🔢", "d": "Hundred chart, number tracing, counting pictures, missing numbers and skip counting. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 2, "t": "Fractions Made Easy", "c": "Kids 8–12", "p": 199, "o": 349, "pg": 12, "e": "🍕", "d": "Shade, name, compare, match and add fractions. Answer key included.", "link": "", "file": "", "preview": ""}, {"id": 3, "t": "Alphabet Tracing Sample", "c": "Kids 5–7", "p": 0, "o": 0, "pg": 14, "e": "✏️", "d": "Trace every letter from A to Z.", "link": "", "file": "", "preview": ""}], "quotes": [{"q": "My daughter asks for “one more worksheet” every evening.", "n": "Parent of a 6-year-old"}, {"q": "The fractions pack saved me hours of lesson prep.", "n": "Primary school teacher"}], "pay": {"upi": "learnandgrow@paytm", "payee": "Learn and Grow", "qr": "", "holder": "Learn & Grow", "bank": "HDFC Bank", "acc": "1234567890", "ifsc": "HDFC0001234", "note": "Please email your UTR reference after payment.", "whatsapp": ""}, "webAppUrl": "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec", "workHours": {"start": "09:00", "end": "18:00", "offlineMsg": "We are currently offline. Leave a message or chat on WhatsApp and our executive will get back to you shortly!"}, "files": []}</script>
 <script id="app-js">
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec";
 const $=s=>document.querySelector(s),COL=["#ffc933","#9fe3cf","#ffb3a6","#c9d4ff"];
 const QR="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=u=>/^(https?:\/\/|\/_blob\/[0-9a-f]{32}$)/i.test(u||"")?u:"";
 let D=JSON.parse($("#site-data").textContent),cat="All",q="",cart=[];
 try{cart=JSON.parse(localStorage.getItem("lg-cart")||"[]")}catch(e){}
+// Check localStorage for admin overrides if saved
+try{
+  const localAdmin=localStorage.getItem("lg-admin-data");
+  if(localAdmin){ D=JSON.parse(localAdmin); }
+}catch(e){}
+
+const WEB_APP_URL = D.webAppUrl || "https://script.google.com/macros/s/AKfycbznU2RRGnFmfTTcRf_fRRBluB0sVFL-rkikZ4RLWG_ryNaOGsO8IiWcDzHWmEzw2j3pVw/exec";
+
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("show"),3000)}
 const save=()=>{try{localStorage.setItem("lg-cart",JSON.stringify(cart))}catch(e){}};
 const prod=id=>D.products.find(p=>p.id===id);
@@ -123,8 +131,8 @@ function shell(){
 <footer><div class="wrap">© ${new Date().getFullYear()} ${esc(D.brand)}. ${esc(D.footer)}</div></footer>
 <aside id="drawer" aria-label="Cart" aria-hidden="true"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:1.5rem">Your cart</h2><button class="x" id="closeCart">Close</button></div>
 <ul id="items"></ul><div class="tot"><span>Total</span><span id="total">₹0</span></div><button class="btn" id="checkout">Checkout</button><p class="meta" style="margin:8px 0 0">Pay by UPI, QR code or bank transfer. Your PDF is emailed once payment is confirmed.</p></aside><div id="modal"></div>
-<button class="chatbtn" id="chatBtn" aria-label="Open chat">💬 Chat</button>
-<div class="chat" id="chat" hidden role="dialog" aria-label="Chat"><div class="chathead"><b>Ask ${esc(D.brand)}</b><button class="x" id="chatClose">Close</button></div><div class="chatlog" id="chatLog" aria-live="polite"></div><div class="chips" id="chips"></div><div class="chatin"><input class="field" id="chatInput" placeholder="Type your question" aria-label="Type your question"><button class="btn sm" id="chatSend">Send</button></div><div class="chatfoot" id="chatFoot"></div></div>`;
+<button class="chatbtn" id="chatBtn" aria-label="Open chat"><span style="font-size:1.2rem">💬</span> Chat with us</button>
+<div class="chat" id="chat" hidden role="dialog" aria-label="Chat"><div class="chathead"><b>Ask ${esc(D.brand)}</b><button class="x" id="chatClose">✕</button></div><div class="chatlog" id="chatLog" aria-live="polite"></div><div class="chips" id="chips"></div><div class="chatin"><input class="field" id="chatInput" placeholder="Type your question..." aria-label="Type your question"><button class="btn sm" id="chatSend">Send</button></div><div class="chatfoot" id="chatFoot"></div></div>`;
  tabs();grid();cartUI()}
 function tabs(){$("#tabs").innerHTML=["All",...D.cats,"Free"].map(c=>`<button class="tab" data-filter="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join("")}
 function grid(){
@@ -179,52 +187,118 @@ function submitOrderToSheet() {
   .catch(() => { toast("Network error. Please try again."); });
 }
 
+// Check if currently within working hours
+function isWorkingHours(){
+  const wh = D.workHours || { start: "09:00", end: "18:00" };
+  const now = new Date();
+  const currentTime = String(now.getHours()).padStart(2,'0') + ":" + String(now.getMinutes()).padStart(2,'0');
+  return currentTime >= wh.start && currentTime <= wh.end;
+}
+
 const chat={log:[]};
-function chatRender(){const el=$("#chatLog");el.innerHTML=chat.log.map(m=>`<div class="msg ${m.w}">${esc(m.t).replace(/\n/g,"<br>")}${(m.ids||[]).map(id=>{const p=prod(id);return p?`<div><button class="chip" ${p.p?`data-add="${id}">Add ${esc(p.t)} (₹${p.p})`:`data-free="${id}">Download ${esc(p.t)} free`}</button></div>`:""}).join("")}</div>`).join("");el.scrollTop=el.scrollHeight}
-function chatOpen(){$("#chat").hidden=false;$("#chatBtn").hidden=true;if(!chat.log.length)chat.log.push({w:"bot",t:"Hi! I can help you pick a pack, explain how to pay, or answer questions about downloads. What would you like to know?"});
- $("#chips").innerHTML=["Which pack for my child?","How do I pay?","How do I get the PDF?","Free samples"].map(x=>`<button class="chip" data-q="${esc(x)}">${esc(x)}</button>`).join("");
- const P=PAY(),a=[];if(P.whatsapp)a.push(`<a href="https://wa.me/${esc(P.whatsapp.replace(/\D/g,""))}" target="_blank" rel="noopener">Chat on WhatsApp</a>`);if(D.email)a.push(`<a href="mailto:${esc(D.email)}">Email us</a>`);$("#chatFoot").innerHTML=a.length?"Prefer a person? "+a.join(" · "):"";chatRender()}
-function ask(t){t=t.trim();if(!t)return;chat.log.push({w:"me",t});const r=bot(t);chat.log.push({w:"bot",t:r.t,ids:r.ids});chatRender()}
+function chatRender(){
+  const el=$("#chatLog");
+  el.innerHTML=chat.log.map(m=>`<div class="msg ${m.w}">${esc(m.t).replace(/
+/g,"<br>")}${(m.ids||[]).map(id=>{const p=prod(id);return p?`<div><button class="chip" ${p.p?`data-add="${id}">Add ${esc(p.t)} (₹${p.p})`:`data-free="${id}">Download ${esc(p.t)} free`}</button></div>`:""}).join("")}</div>`).join("");
+  el.scrollTop=el.scrollHeight;
+}
+
+function chatOpen(){
+  $("#chat").hidden=false;$("#chatBtn").hidden=true;
+  if(!chat.log.length){
+    const online = isWorkingHours();
+    let intro = "Hi! I'm your Learn & Grow assistant. I can help you pick a study pack, explain how to pay, or answer questions.";
+    if(!online && D.workHours && D.workHours.offlineMsg){
+      intro = D.workHours.offlineMsg;
+    }
+    chat.log.push({w:"bot", t: intro});
+  }
+  $("#chips").innerHTML=["Which pack for my child?","How do I pay?","Free samples","Talk to executive"].map(x=>`<button class="chip" data-q="${esc(x)}">${esc(x)}</button>`).join("");
+  
+  const P=PAY(), a=[];
+  if(P.whatsapp) {
+    a.push(`<a href="https://wa.me/${esc(P.whatsapp.replace(/\D/g,""))}?text=${encodeURIComponent("Hi Learn & Grow team, I need assistance with study packs.")}" target="_blank" rel="noopener" style="font-weight:700;color:var(--mint);">💬 Chat with online executive on WhatsApp</a>`);
+  }
+  if(D.email) {
+    a.push(`<a href="mailto:${esc(D.email)}">Email support</a>`);
+  }
+  $("#chatFoot").innerHTML = a.length ? a.join(" | ") : "";
+  chatRender();
+}
+
+function ask(t){
+  t=t.trim();if(!t)return;
+  chat.log.push({w:"me",t});
+  const r=bot(t);
+  chat.log.push({w:"bot",t:r.t,ids:r.ids});
+  chatRender();
+}
+
 function bot(t){
- const s=t.toLowerCase(),P=PAY(),paid=D.products.filter(p=>p.p),free=D.products.filter(p=>!p.p);
- const ln=a=>a.map(p=>p.e+" "+p.t+" ("+(p.p?"₹"+p.p:"free")+")").join("\n");
- const rng=c=>{const m=String(c).match(/(\d+)\D+(\d+)/);return m?[+m[1],+m[2]]:null};
- const n=(s.match(/\b(\d{1,2})\b/)||[])[1],age=n&&+n<=18?+n:null;
- if(/\b(hi|hello|hey)\b/.test(s))return{t:"Hello! Tell me your child’s age or what they want to learn, and I’ll suggest a pack."};
- if(/pay|upi|gpay|google pay|phonepe|paytm|qr|bank|card|banking/.test(s))return{t:"You can pay by UPI (Google Pay, PhonePe, Paytm), by scanning a QR code, or by bank transfer. Add packs to your cart, press Checkout and follow the steps. After paying, enter your payment reference and we’ll confirm it and email your PDFs."};
- if(/download|deliver|receive|email|how long|when/.test(s)||/get.*pdf/.test(s))return{t:"After we confirm your payment, the PDFs are emailed to the address you give at checkout. Free packs download straight from the shop."};
- if(/refund|money back|return/.test(s))return{t:"If a paid pack doesn’t match its description, contact us within 7 days and we’ll sort it out."};
- if(/print/.test(s))return{t:"Yes, you can print the PDFs for your own family or classroom as often as you like. Please don’t resell or share them."};
- if(/free|sample/.test(s))return{t:"Free packs:\n"+ln(free),ids:free.map(p=>p.id)};
- if(/price|cost|how much|cheap/.test(s))return{t:"Our paid packs:\n"+ln(paid),ids:paid.map(p=>p.id)};
- if(/human|person|whatsapp|call|contact|talk/.test(s))return{t:P.whatsapp||D.email?"You can reach us with the links under the chat box.":"Please use the contact form at the bottom of the page."};
- if(age){const L=D.products.filter(p=>{const r=rng(p.c);return r&&age>=r[0]&&age<=r[1]});if(L.length)return{t:"For a "+age+"-year-old, I’d suggest:\n"+ln(L),ids:L.map(p=>p.id)}}
- if(/which|recommend|suggest|child|kid|age/.test(s))return{t:"How old is your child, or which subject do they need help with? For example, “7” or “fractions”."};
- const w=s.split(/\W+/).filter(x=>x.length>3),hit=D.products.filter(p=>w.some(x=>(p.t+" "+p.d+" "+p.c).toLowerCase().includes(x))).slice(0,4);
- if(hit.length)return{t:"These might fit:\n"+ln(hit),ids:hit.map(p=>p.id)};
- return{t:"I’m not sure about that. Try asking about age, price, payment or delivery"+(P.whatsapp||D.email?", or use the links under the chat box to reach us.":".")}}
-document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const s=b.dataset;
- if(s.filter){cat=s.filter;tabs();grid();$("#shelf").scrollIntoView()}
- else if(s.add){const id=+s.add;if(!cart.includes(id)){cart.push(id);save();cartUI();grid();toast("Added to cart")}else drawer(true)}
- else if(s.rm){cart=cart.filter(i=>i!==+s.rm);save();cartUI();grid()}
- else if(s.free){const u=url(prod(+s.free).file);u?window.open(u,"_blank","noopener"):toast("This free PDF isn’t uploaded yet.")}
- else if(b.id==="openCart")drawer(true);else if(b.id==="closeCart")drawer(false);
- else if(s.buy){const id=+s.buy;if(!cart.includes(id)){cart.push(id);save();cartUI();grid()}checkout()}
- else if(b.id==="checkout")checkout();
- else if(b.id==="submitOrderBtn")submitOrderToSheet();
- else if(b.id==="mClose")$("#modal").innerHTML="";
- else if(s.cp)navigator.clipboard.writeText(s.cp).then(()=>toast("Copied"),()=>toast("Couldn’t copy. Select the text instead."));
- else if(s.openchat){$("#modal").innerHTML="";chatOpen()}
- else if(b.id==="chatBtn")chatOpen();
- else if(b.id==="chatClose"){$("#chat").hidden=true;$("#chatBtn").hidden=false}
- else if(b.id==="chatSend"){const i=$("#chatInput");ask(i.value);i.value=""}
- else if(s.q)ask(s.q);
+  const s=t.toLowerCase(), P=PAY(), paid=D.products.filter(p=>p.p), free=D.products.filter(p=>!p.p);
+  const ln=a=>a.map(p=>p.e+" "+p.t+" ("+(p.p?"₹"+p.p:"free")+")").join("
+");
+  const rng=c=>{const m=String(c).match(/(\d+)\D+(\d+)/);return m?[+m[1],+m[2]]:null};
+  const n=(s.match(/(\d{1,2})/)||[])[1],age=n&&+n<=18?+n:null;
+  
+  if(/talk to executive|human|person|whatsapp|call|contact|support/.test(s)){
+    if(P.whatsapp){
+      return {t: "You can instantly connect with our available online support executive on WhatsApp:", ids: []};
+    } else {
+      return {t: "Please reach out to us at " + (D.email || "our support email") + " and our team will get back to you promptly."};
+    }
+  }
+  if(/(hi|hello|hey)/.test(s))return{t:"Hello! Tell me your child’s age or what they want to learn, and I’ll suggest the right study pack."};
+  if(/pay|upi|gpay|google pay|phonepe|paytm|qr|bank|card|banking/.test(s))return{t:"You can pay securely via UPI, QR code scan, or bank transfer at checkout. After paying, submit your UTR reference number to log your order instantly."};
+  if(/download|deliver|receive|email|how long|when/.test(s)||/get.*pdf/.test(s))return{t:"Once payment verification is complete, your PDF study materials are emailed directly to you instantly."};
+  if(/refund|money back|return/.test(s))return{t:"If a paid pack doesn’t match its description, contact us within 7 days and we’ll resolve it promptly."};
+  if(/print/.test(s))return{t:"Yes! You can print our PDF worksheets as many times as you like for your family or classroom."};
+  if(/free|sample/.test(s))return{t:"Here are our free sample packs:
+"+ln(free),ids:free.map(p=>p.id)};
+  if(/price|cost|how much|cheap/.test(s))return{t:"Here are our paid study packs:
+"+ln(paid),ids:paid.map(p=>p.id)};
+  if(age){const L=D.products.filter(p=>{const r=rng(p.c);return r&&age>=r[0]&&age<=r[1]});if(L.length)return{t:"For a "+age+"-year-old child, I recommend:
+"+ln(L),ids:L.map(p=>p.id)}}
+  if(/which|recommend|suggest|child|kid|age/.test(s))return{t:"How old is your child, or which subject do they need help with? For example, type '7' or 'fractions'."};
+  
+  const w=s.split(/\W+/).filter(x=>x.length>3),hit=D.products.filter(p=>w.some(x=>(p.t+" "+p.d+" "+p.c).toLowerCase().includes(x))).slice(0,4);
+  if(hit.length)return{t:"These packs might be what you're looking for:
+"+ln(hit),ids:hit.map(p=>p.id)};
+  
+  const online = isWorkingHours();
+  const offlineNote = (!online && D.workHours && D.workHours.offlineMsg) ? "
+
+(Note: " + D.workHours.offlineMsg + ")" : "";
+  return{t:"I'm here to help! You can ask about our study packs, pricing, free samples, or tap 'Talk to executive' to chat on WhatsApp." + offlineNote};
+}
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const s=b.dataset;
+  if(s.filter){cat=s.filter;tabs();grid();$("#shelf").scrollIntoView()}
+  else if(s.add){const id=+s.add;if(!cart.includes(id)){cart.push(id);save();cartUI();grid();toast("Added to cart")}else drawer(true)}
+  else if(s.rm){cart=cart.filter(i=>i!==+s.rm);save();cartUI();grid()}
+  else if(s.free){const u=url(prod(+s.free).file);u?window.open(u,"_blank","noopener"):toast("This free PDF isn’t uploaded yet.")}
+  else if(b.id==="openCart")drawer(true);else if(b.id==="closeCart")drawer(false);
+  else if(s.buy){const id=+s.buy;if(!cart.includes(id)){cart.push(id);save();cartUI();grid()}checkout()}
+  else if(b.id==="checkout")checkout();
+  else if(b.id==="submitOrderBtn")submitOrderToSheet();
+  else if(b.id==="mClose")$("#modal").innerHTML="";
+  else if(s.cp)navigator.clipboard.writeText(s.cp).then(()=>toast("Copied"),()=>toast("Couldn’t copy. Select the text instead."));
+  else if(s.openchat){$("#modal").innerHTML="";chatOpen()}
+  else if(b.id==="chatBtn")chatOpen();
+  else if(b.id==="chatClose"){$("#chat").hidden=true;$("#chatBtn").hidden=false}
+  else if(b.id==="chatSend"){const i=$("#chatInput");ask(i.value);i.value=""}
+  else if(s.q)ask(s.q);
 });
+
 document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.id==="chatInput"){ask(e.target.value);e.target.value=""}});
 document.addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);
  if(e.target.id==="contactForm"){
    if(!D.email){toast("Contact email not set.");return;}
-   location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Message from "+f.get("name"))+"&body="+encodeURIComponent(f.get("msg")+"\n\nReply to: "+f.get("email"));
+   location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Message from "+f.get("name"))+"&body="+encodeURIComponent(f.get("msg")+"
+
+Reply to: "+f.get("email"));
  } else if(e.target.id==="signupForm"){
    if(!D.email){toast("Contact email not set.");return;}
    location.href="mailto:"+D.email+"?subject="+encodeURIComponent("Newsletter Signup")+"&body="+encodeURIComponent("Please add me: "+f.get("email"));
